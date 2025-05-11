@@ -1,0 +1,11 @@
+torch
+transformers
+langchain
+langchain-core
+langchain-community
+sentence-transformers
+langserve[all]
+chromadb
+langchain-chroma
+faiss-cpu
+llama-cpp-python
