@@ -3,7 +3,7 @@ from langchain_core.callbacks import CallbackManager, StreamingStdOutCallbackHan
 
 def get_llm(model_path: str, max_new_token = 2048):
     llm = LlamaCpp(model_path=model_path,
-                   n_gpu_layers=1,
+                   n_gpu_layers=-1,
                    n_batch=512,
                    f16_kv=True,
                    n_ctx=2048,
