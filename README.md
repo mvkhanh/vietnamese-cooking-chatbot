@@ -15,6 +15,10 @@ git clone https://github.com/your-username/vietnamese-cooking-chatbot.git
 cd vietnamese-cooking-chatbot
 ```
 ### 2. Cài đặt các thư viện cần thiết
+```
 pip install -r requirements.txt
+```
 ### 3. Chạy ứng dụng FastAPI với Uvicorn
+```
 uvicorn src.app:app --host "0.0.0.0" --port 5000 --reload
+```
