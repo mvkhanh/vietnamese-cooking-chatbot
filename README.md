@@ -23,7 +23,7 @@ git clone https://github.com/your-username/vietnamese-cooking-chatbot.git
 cd vietnamese-cooking-chatbot
 ```
 ### 2. Download the .gguf model file
-Download the PhoGPT-4B-Chat GGUF(https://huggingface.co/vinai/PhoGPT-4B-Chat-gguf/tree/main) model
+Download the [PhoGPT-4B-Chat GGUF](https://huggingface.co/vinai/PhoGPT-4B-Chat-gguf/tree/main) model
 and place it in the model/ directory (create the folder if it doesn’t exist).
 Example path after downloading:
 ```
