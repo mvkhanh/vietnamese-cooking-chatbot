@@ -37,7 +37,7 @@ app.add_middleware(
 async def check():
     return {'status': 'OK'}
 
-@app.get('/generative_ai', response_model=OutputQA)
+@app.post('/generative_ai', response_model=OutputQA)
 async def generative_ai(inputs: InputQA):
     answer = chain.invoke(inputs.question)
     return {'answer': answer}
