@@ -44,4 +44,20 @@ pip install -r requirements.txt
 ```
 uvicorn src.app:app --host "0.0.0.0" --port 5001 --reload
 ```
-Once running, you can interact with the chatbot via API endpoints (http://localhost:5001/cooking_chatbot/playground/).
+
+"""
+Once the server is running, you can interact with the chatbot using either of the following methods:
+
+1. POST Request (Single Response):
+   - Endpoint: POST http://localhost:5001/chatbot
+   - Request Body (JSON): {"id": "<thread_id>", "question": "<your question>"}
+   - The server will return a single response from the chatbot.
+
+2. WebSocket Streaming (Real-time Response):
+   - Connect to: ws://localhost:5001/ws/<thread_id>
+   - Send text messages through the WebSocket
+   - Receive the chatbot's responses as a stream (step by step)
+
+You can also access a demo HTML chat interface at:
+   - http://localhost:5001/
+"""
