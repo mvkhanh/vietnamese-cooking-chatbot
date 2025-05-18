@@ -9,3 +9,4 @@ chromadb
 langchain-chroma
 faiss-cpu
 llama-cpp-python
+websockets

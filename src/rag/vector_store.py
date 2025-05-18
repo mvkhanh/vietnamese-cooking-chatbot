@@ -1,6 +1,7 @@
 from typing import Union
 from langchain_chroma import Chroma
 from langchain_community.vectorstores import FAISS
+from langchain_core.tools import tool
 from .embedding import CustomeEmbedding
 import torch
 import os
@@ -22,6 +23,11 @@ class VectorDB:
             db = self.vector_db.from_texts(texts, embedding=self.embedding, persist_directory='./chroma_db')
         return db
     
-    def get_retriever(self, search_type: str='similarity', search_kwargs: dict={'k' : 1}):
-        retriever = self.db.as_retriever(search_type=search_type, search_kwargs=search_kwargs)
-        return retriever
+    def retrieve(self, query: str, k=3) -> str:
+        """Truy xuất thông tin liên quan đến truy vấn."""
+        retrieved_docs = self.db.similarity_search(query, k=k)
+        serialized = '\n\n'.join(
+            f"{doc.page_content}"
+            for doc in retrieved_docs
+        )
+        return serialized

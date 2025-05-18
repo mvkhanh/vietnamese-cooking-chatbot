@@ -2,7 +2,6 @@ from typing import Literal
 import json
 
 class Loader:
-    key_maps = {'name': 'Tên món', 'description': 'Mô tả món ăn', 'cook_time': 'Thời gian nấu', 'instructions': 'Hướng dẫn nấu', 'categories': 'Danh mục món ăn', 'ingredients': 'Nguyên liệu', 'level': 'Mức độ', 'servings': 'Khẩu phần'}
     
     def __init__(self, file_type: str = Literal['json']):
         assert file_type in ['json'], 'file_type must be json'
@@ -17,30 +16,33 @@ class Loader:
         for recipe in data:
             if 'món ngon mỗi ngày' in recipe['description'].lower():
                 recipe['description'] = '\n'.join([s for s in recipe['description'].split('\n') if 'món ngon mỗi ngày' not in s.lower()])
-            txt = ''
-            for k, v in Loader.key_maps.items():
-                value = recipe[k]
-                if value == '' or value == 0 or value == []:
-                    continue
-                txt += f'{v}: '
-                if k == 'categories':
-                    txt += ', '.join([c['detail_category'] for c in value]) + '.'
-                elif k == 'ingredients':
-                    txt += '\n'
-                    for i in value:
-                        txt += f"- {i['name']}"
-                        if i['quantity'] != '':
-                            txt += f": {i['quantity']}"
-                        txt += '.\n'
-                elif k == 'instructions':
-                    txt += '\n'
-                    txt += '\n'.join([f'- {s}' for s in value.split('\n')])
-                elif k == 'cook_time':
-                    txt += f'{value} phút.'
-                elif k == 'servings':
-                    txt += f'{value} người.'
-                else:
-                    txt += f'{value}.'
-                txt += '\n'
-            texts.append(txt)
+                
+            instructions = ingredients = categories = f'{recipe["name"]}\n'
+            
+            if recipe['cook_time'] != 0:
+                instructions += f'Thời gian nấu: {recipe["cook_time"]} phút.\n'
+            if recipe['instructions'] != "":
+                instructions += 'Hướng dẫn nấu:\n'
+                instructions += '\n'.join([f'- {s}' for s in recipe['instructions'].split('\n')])
+            
+            if recipe['servings'] != 0:
+                ingredients += f'Khẩu phần: {recipe["servings"]}\n'
+            if recipe['ingredients'] != []:
+                ingredients += 'Nguyên liệu:\n'
+                for i in recipe['ingredients']:
+                    ingredients += f"- {i['name']}"
+                    if i['quantity'] != '':
+                        ingredients += f": {i['quantity']}"
+                    ingredients += '.\n'
+                    
+            if categories != []:
+                categories += 'Danh mục món ăn: '
+                categories += ', '.join([c['detail_category'] for c in recipe['categories']]) + '.'
+            
+            if instructions != f'{recipe["name"]}\n':
+                texts.append(instructions)
+            if ingredients != f'{recipe["name"]}\n':
+                texts.append(ingredients)
+            if categories != f'{recipe["name"]}\n':
+                texts.append(categories)
         return texts
