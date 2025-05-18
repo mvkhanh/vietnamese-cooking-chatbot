@@ -1,4 +1,4 @@
-# 🇻🇳 Vietnamese Cooking Chatbot
+# 🇻🇳 Vietnamese Culinary Chatbot
 
 A smart Vietnamese culinary chatbot that helps you:
 - Suggest dishes based on available ingredients  
