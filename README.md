@@ -45,7 +45,6 @@ pip install -r requirements.txt
 uvicorn src.app:app --host "0.0.0.0" --port 5001 --reload
 ```
 
-"""
 Once the server is running, you can interact with the chatbot using either of the following methods:
 
 1. POST Request (Single Response):
@@ -60,4 +59,3 @@ Once the server is running, you can interact with the chatbot using either of th
 
 You can also access a demo HTML chat interface at:
    - http://localhost:5001/
-"""
